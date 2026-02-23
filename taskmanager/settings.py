@@ -1,24 +1,29 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# ==============================
+# SECURITY
+# ==============================
 SECRET_KEY = 'django-insecure-q!=+zepgv2rm8*(ksx#9ml2a3x=^$r(929k-nab_3!vk^9_kg9'
 
-DEBUG = True
+DEBUG = True  # Change to False later if needed
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]  # Allow all hosts (OK for student project)
 
 
-# -----------------------------
+# ==============================
 # INSTALLED APPS
-# -----------------------------
+# ==============================
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',  # ← COMMA WAS MISSING HERE
+    'django.contrib.staticfiles',
 
     'corsheaders',
     'rest_framework',
@@ -26,11 +31,11 @@ INSTALLED_APPS = [
 ]
 
 
-# -----------------------------
+# ==============================
 # MIDDLEWARE
-# -----------------------------
+# ==============================
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # MUST BE FIRST
+    'corsheaders.middleware.CorsMiddleware',  # MUST be first
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -43,6 +48,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'taskmanager.urls'
 
+
+# ==============================
+# TEMPLATES
+# ==============================
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -61,9 +70,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'taskmanager.wsgi.application'
 
 
-# -----------------------------
+# ==============================
 # DATABASE
-# -----------------------------
+# ==============================
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -72,9 +81,9 @@ DATABASES = {
 }
 
 
-# -----------------------------
+# ==============================
 # PASSWORD VALIDATION
-# -----------------------------
+# ==============================
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -91,32 +100,31 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# -----------------------------
+# ==============================
 # INTERNATIONALIZATION
-# -----------------------------
+# ==============================
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_TZ = True
 
 
-# -----------------------------
+# ==============================
 # STATIC FILES
-# -----------------------------
-STATIC_URL = 'static/'
+# ==============================
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-# -----------------------------
-# DEFAULT PK
-# -----------------------------
+# ==============================
+# DEFAULT PRIMARY KEY
+# ==============================
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-import os
-
-ALLOWED_HOSTS = ['*']
-
+# ==============================
+# CORS SETTINGS
+# ==============================
 CORS_ALLOW_ALL_ORIGINS = True
